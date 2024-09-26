@@ -10,12 +10,12 @@ const app = express();
 app.use(express.json());
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect( process.env.DB_Connection, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
 // Task routes
-app.use('/tasks', taskRoutes);
+app.use('/todos', taskRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 3000;
