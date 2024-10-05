@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const taskRoutes = require('./routes/taskRoutes');
+const authRoutes = require('./routes/user.auth.routes');
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ mongoose.connect( process.env.DB_Connection)
 
 // Task routes
 app.use('/todos', taskRoutes);
+app.use('/auth',authRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 3000;
