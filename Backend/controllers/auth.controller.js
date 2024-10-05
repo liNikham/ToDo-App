@@ -1,6 +1,6 @@
 const signupSchema = require("../zodSchemas/signUpSchema");
 const User = require("../models/User");
-exports.signup = async ( req, res)=>{
+exports.signup = async ( req, res , next)=>{
     try{
          signupSchema.parse(req.body);
          const { username, email, password}= req.body;
@@ -10,13 +10,12 @@ exports.signup = async ( req, res)=>{
          }
          
          const newUser = new User({username, email, password});
-         console.log(newUser);
          await newUser.save();
          return res.status(201).json({message: "Signup successful"});
 
 
     }    
     catch(err){
-         res.status(400).json({ message: err.message });
+        next(err);
     }
 }
